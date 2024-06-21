@@ -1,3 +1,5 @@
 docker compose up -d db *** running your compose.yaml file
 
 node version 20.13.1
+
+38:19 - 
