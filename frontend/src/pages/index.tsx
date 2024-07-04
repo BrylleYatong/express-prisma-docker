@@ -20,6 +20,7 @@ export default function Home() {
   console.log("%c 🔪: Home -> users ", "font-size:16px;background-color:#6a9f4b;color:white;", users)
   const [newUsers, setNewUsers] = useState({id: "", name: '', email:''});
   const [updateUser, setUpdateUser] = useState({id: '', name: '', email: ''});
+  console.log("%c 🎤: Home -> updateUser ", "font-size:16px;background-color:#1f9703;color:white;", updateUser)
 
   //  fetch users
   useEffect(() => {
@@ -80,9 +81,8 @@ export default function Home() {
         }
       }
     ) 
-    console.log("%c 🚮: handleSelectUser -> user ", "font-size:16px;background-color:#95382c;color:white;", user)
-    // setUpdateUser(user ?? {id: '', name:'', email:''})
-  }
+    setUpdateUser({id: String(user?.id), name: user?.name as string, email: user?.email as string})
+  } 
 
   const sf = () => {
     console.log("%c 🇭🇲: sf -> sampleFunction ", "font-size:16px;background-color:#77172f;color:white;", sf)
@@ -90,8 +90,8 @@ export default function Home() {
 
   return(
     <main className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-500">
-      <div className="space-y-4 w-full max-w-2x1">
-        <h1 className="text-2x1 font-bold text-gray-800 text-center">User Management App</h1>
+      <div className="space-y-4 w-2/5 max-w-2x1">
+        <h1 className="text-2x1 font-bold text-black-800 text-center">User Management App</h1>
 
         <form onSubmit={createUser} className="p-4 bg-blue-100 rounded shadow">
           <input
@@ -139,8 +139,7 @@ export default function Home() {
           {users.map((user:any)=>(
             <div className="flex items-center justify-between bg-white p-4 rounded-lg shadow">
               <CardComponent 
-                onUserSelect={() => handleSelectUser(user.id)} 
-                onClick={() => sf()} 
+                onClick={() => handleSelectUser(user.id)} 
                 updateUsers={updateUser} 
                 user={user} 
               />
@@ -151,6 +150,9 @@ export default function Home() {
           ))}
         </div>
       </div>
+      <React.Fragment>
+        Hello Here
+      </React.Fragment>
     </main>
   )
 };

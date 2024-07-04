@@ -10,23 +10,20 @@ interface UpdateUser {
     id: string;
     name: string;
     email: string;
+    time?: string;
 }
 
 type OnClick = () => void
-type OnUserSelect = () => void
 
-const CardComponent: React.FC<{ onUserSelect: OnUserSelect, onClick: OnClick, updateUsers: UpdateUser, user: Card}> = ({onUserSelect, onClick, updateUsers, user}) => {
+const CardComponent: React.FC<{ onClick: OnClick, updateUsers: UpdateUser, user: Card}> = ({onClick, updateUsers, user}) => {
     const [cardUser, setCardUser] = useState(user)
-    const [updateUser, setUpdateUser] = useState(updateUsers)
-    console.log("%c 🇦🇩: updateUser ", "font-size:16px;background-color:#d02e2b;color:white;", updateUser)
 
     return(
         <div 
             onClick={() => { 
-                onUserSelect()
                 onClick()
             }} 
-            className="bg-white shadow-lg rounded-lg p-2 mb-2 hover:bg-gray-100"
+            className="bg-white shadow-lg rounded-lg p-2 mb-2 hover:bg-gray-100 hover:cursor-pointer"
         >
             <div className="text-sm text-gray-600">ID: {user.id}</div>
             <div className="text-lg font-semibold text-gray-800">{user.name}</div>
