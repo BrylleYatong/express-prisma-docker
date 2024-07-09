@@ -17,10 +17,8 @@ interface UpdateUser {
 export default function Home() {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
   const [users, setUsers] = useState<User[]>([]);
-  console.log("%c 🔪: Home -> users ", "font-size:16px;background-color:#6a9f4b;color:white;", users)
   const [newUsers, setNewUsers] = useState({id: "", name: '', email:''});
   const [updateUser, setUpdateUser] = useState({id: '', name: '', email: ''});
-  console.log("%c 🎤: Home -> updateUser ", "font-size:16px;background-color:#1f9703;color:white;", updateUser)
 
   //  fetch users
   useEffect(() => {
@@ -33,7 +31,7 @@ export default function Home() {
       }
     };
     fetchData();
-  },[]);
+  },[apiUrl]);
 
   const createUser = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -136,9 +134,10 @@ export default function Home() {
         </form>
 
         <div className="space-y-2">
-          {users.map((user:any)=>(
-            <div className="flex items-center justify-between bg-white p-4 rounded-lg shadow">
-              <CardComponent 
+          {users.map((user:any, index)=>(
+            <div key={index} className="flex items-center justify-between bg-white p-4 rounded-lg shadow">
+              <CardComponent
+                key={index} 
                 onClick={() => handleSelectUser(user.id)} 
                 updateUsers={updateUser} 
                 user={user} 

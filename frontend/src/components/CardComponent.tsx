@@ -15,7 +15,7 @@ interface UpdateUser {
 
 type OnClick = () => void
 
-const CardComponent: React.FC<{ onClick: OnClick, updateUsers: UpdateUser, user: Card}> = ({onClick, updateUsers, user}) => {
+const CardComponent: React.FC<{key: number, onClick: OnClick, updateUsers: UpdateUser, user: Card}> = ({onClick, updateUsers, user}) => {
     const [cardUser, setCardUser] = useState(user)
 
     return(
